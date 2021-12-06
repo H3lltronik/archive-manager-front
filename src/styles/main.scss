@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
+
+:root[data-theme="theme-dark"] {
+    --purple-light: #6200ee;
+    --purple-dark: #4a00b3;
+    --purple-text: #883ff1;
+    --blue-light: #4940f2;
+    --gray-text: #dddddd;
+    --black-text: #101010;
+    --white: #fff;
+}
+
+body, #app {
+    height: 100vh;
+    // overflow: hidden;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+#app {
+    background-color: red;
+}
+
+@import './library-fixes.scss';
+@import './app.scss';
