@@ -17,7 +17,11 @@
             </div>
         </div>
         <div class="body_content">
-            <router-view />
+            <el-row :gutter="20">
+                <el-col :xs="24" :md="12" :lg="8" v-for="(item, index) in ((new Array(100)).fill(0).map(x => x))" :key="index">
+                    <File/>
+                </el-col>
+            </el-row>
         </div>
         <div class="body_footer"></div>
     </div>
@@ -28,6 +32,7 @@ import {Moon, Filter, List, Grid} from '@element-plus/icons'
 import { ref } from '@vue/reactivity';
 import { DARK_THEME } from '../../constants';
 import { switchTheme } from '../../utils';
+import File from '../Common/File.vue';
 
 const showFilters = ref(false)
 
