@@ -16,3 +16,12 @@
 .el-aside {
     width: 300px !important;
 }
+
+.el-aside {
+    overflow: hidden;
+}
+
+.el-button {
+    font-weight: 400;
+    color: var(--purple-dark);
+}

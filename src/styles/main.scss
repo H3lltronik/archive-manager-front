@@ -5,7 +5,7 @@
     --purple-dark: #4a00b3;
     --purple-text: #883ff1;
     --blue-light: #4940f2;
-    --gray-text: #dddddd;
+    --gray-text: #4e4d4d;
     --black-text: #101010;
     --white: #fff;
 }
@@ -18,12 +18,38 @@ body, #app {
     height: 100vh;
     margin: 0;
     overflow: hidden;
+    font-weight: 300;
     font-family: 'Roboto', sans-serif;
 }
 
 #app {
-    background-color: red;
+}
+
+.transition {
+    transition: 0.3s ease-in-out;
 }
 
 @import './library-fixes.scss';
 @import './app.scss';
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
