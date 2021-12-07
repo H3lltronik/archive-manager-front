@@ -10,7 +10,7 @@
     align-items: center;
     padding-right: 20px;
     padding-left: 20px;
-    background-color: pink;
+    @extend .elevation;
     justify-content: space-between;
     &_buttons {
       &,
@@ -65,9 +65,11 @@
   display: flex;
   margin-top: 7px;
   padding-top: 40px;
+  
   align-items: center;
   flex-direction: column;
   background-color: var(--white);
+  border-right: 1px solid rgba(gray, 0.5);
   &_button {
     border: none;
     width: 250px;
@@ -75,7 +77,7 @@
     color: var(--white);
     border-radius: 100px;
     background-color: var(--blue-light);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    @extend .elevation;
     .el-icon {
       width: 25px;
     }
@@ -112,7 +114,7 @@
   border: 1px solid rgba(gray, 0.2);
   &:hover {
     transform: translate(0px,-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    @extend .elevation;
   }
   &_header {
     display: flex;

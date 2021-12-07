@@ -18,7 +18,8 @@
 }
 
 .el-aside {
-    overflow: hidden;
+    overflow-y: hidden;
+    @extend .elevation-right;
 }
 
 .el-button {

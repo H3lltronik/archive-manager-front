@@ -37,10 +37,20 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import { Document } from '@element-plus/icons'
-import { ref } from '@vue/reactivity';
+import { defineComponent, ref } from 'vue'
 
-const checked = ref(false)
-const toggleChecked = () => checked.value = !checked.value
+export default defineComponent({
+    components: {Document},
+    setup() {
+        const checked = ref(false)
+        const toggleChecked = () => checked.value = !checked.value
+
+        return {
+            checked,
+            toggleChecked,
+        }
+  },
+})
 </script>

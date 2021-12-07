@@ -10,6 +10,7 @@
       <el-container>
         <el-main>
           <Body />
+          <UploadDialog/>
         </el-main>
       </el-container>
     </el-container>
@@ -20,10 +21,11 @@
 import Body from "../components/Layout/Body.vue";
 import Aside from "../components/Layout/Aside.vue";
 import Header from "../components/Layout/Header.vue";
+import UploadDialog from "../components/Common/UploadDialog.vue";
 
 export default {
     setup() {
     },
-    components: { Body, Aside, Header }
+    components: { Body, Aside, Header, UploadDialog }
 }
 </script>
