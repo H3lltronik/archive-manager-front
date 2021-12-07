@@ -5,28 +5,28 @@
         <span>INICIO > CARPETA NUEVA > ARCHIVOS</span>
       </div>
       <div class="body_header_buttons">
-        <el-button type="text" :icon="Moon" @click="toggleTheme"
+        <el-button type="secondary" :icon="Moon" @click="toggleTheme"
           >ACTIVAR MODO OSCURO</el-button
         >
 
         <div class="order" v-show="showFilters">
           <el-button
             :class="{ 'order--active': getOrderType == 'list' }"
-            type="text"
+            type="secondary"
             @click="() => changeOrderType('list')"
             :icon="List"
             >LISTA</el-button
           >
           <el-button
             :class="{ 'order--active': getOrderType == 'grid' }"
-            type="text"
+            type="secondary"
             @click="() => changeOrderType('grid')"
             :icon="Grid"
             >CUADRICULA</el-button
           >
         </div>
 
-        <el-button type="text" :icon="Filter" @click="toggleFilter"
+        <el-button type="secondary" :icon="Filter" @click="toggleFilter"
           >ORDENAR POR</el-button
         >
       </div>

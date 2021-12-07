@@ -3,6 +3,7 @@ import { ROUTES } from "../constants";
 import Layout from "../pages/Layout.vue";
 import Login from "../pages/Login.vue";
 import Recover from "../pages/Recover.vue";
+import Register from "../pages/Register.vue";
 
 const routes = [
   {
@@ -14,6 +15,11 @@ const routes = [
     path: ROUTES.RECOVERY.route,
     name: ROUTES.RECOVERY.name,
     component: Recover,
+  },
+  {
+    path: ROUTES.REGISTER.route,
+    name: ROUTES.REGISTER.name,
+    component: Register,
   },
   {
     path: ROUTES.HOME.route,

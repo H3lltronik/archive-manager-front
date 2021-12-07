@@ -27,10 +27,10 @@
         </div>
 
         <div class="file_buttons">
-            <el-button type="text">
+            <el-button type="secondary">
                 <span>DESCARGAR</span>
             </el-button>
-            <el-button type="text">
+            <el-button type="secondary">
                 <span>VISUALIZAR</span>
             </el-button>
         </div>

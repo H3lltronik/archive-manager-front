@@ -11,7 +11,7 @@
 
       <template #footer>
         <div class="upload-modal_footer">
-          <el-button type="text" @click="handleClose">CANCELAR</el-button>
+          <el-button type="secondary" @click="handleClose">CANCELAR</el-button>
           <el-button type="primary" @click="handleClose">CARGAR ARCHIVO</el-button>
         </div>
       </template>

@@ -13,7 +13,7 @@ export const key: InjectionKey<Store<State>> = Symbol()
 export const store = createStore<State>({
   state: {
     order: 'grid',
-    uploadModalOpened: true
+    uploadModalOpened: false,
   },
   mutations: {
     changeOrderType (state, orderType: orderType) {

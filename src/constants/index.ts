@@ -13,4 +13,8 @@ export const ROUTES = {
         name: 'Home',
         route: '/home',
     },
+    REGISTER: {
+        name: 'Register',
+        route: '/register',
+    },
 }

@@ -6,22 +6,17 @@
             </div>
 
             <div class="login_text">
-                <strong>Acceder</strong>
+                <strong>Crear cuenta</strong>
                 <p>Ingresa los datos de tu cuenta</p>
             </div>
 
-            <LoginForm class="form"/>
-
-            <router-link :to="ROUTES.REGISTER.route">
-                <el-button type="secondary" size="small" class="">CREAR CUENTA</el-button>
-            </router-link>
+            <RegisterForm class="form"/>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import LoginForm from "../components/Forms/LoginForm.vue";
-import { ROUTES } from "../constants";
+import RegisterForm from "../components/Forms/RegisterForm.vue";
 
 export default {
     setup() {
@@ -31,9 +26,8 @@ export default {
         return {
             recoverPassword,
             doLogin,
-            ROUTES,
         };
     },
-    components: { LoginForm }
+    components: { RegisterForm }
 }
 </script>
