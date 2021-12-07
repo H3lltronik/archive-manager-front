@@ -196,3 +196,24 @@
     }
   }
 }
+
+.upload-modal {
+  h3 {
+    margin-top: 0;
+    font-size: 40px;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 2px;
+    color: var(--black-text);
+  }
+  &_indication {
+    padding: 15px;
+    margin: 20px 0;
+    cursor: pointer;
+    color: var(--black-text);
+    background-color: var(--gray-light);
+  }
+  &_input {
+
+  }
+}

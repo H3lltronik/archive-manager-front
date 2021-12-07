@@ -59,13 +59,13 @@ import { useStore } from "vuex";
 import { key, orderType } from "../../store";
 
 export default defineComponent({
-  components: { Moon, Filter, List, Grid, File },
+  components: { File },
   setup() {
     const showFilters = ref(false);
+    const store = useStore(key);
 
     const toggleFilter = () => (showFilters.value = !showFilters.value);
     const toggleTheme = () => switchTheme(DARK_THEME);
-    const store = useStore(key);
 
     const changeOrderType = (type: orderType) =>
       store.commit("changeOrderType", type);
@@ -76,6 +76,10 @@ export default defineComponent({
       toggleTheme,
       changeOrderType,
       getOrderType,
+      Grid,
+      Moon,
+      Filter,
+      List,
     };
   },
 });
