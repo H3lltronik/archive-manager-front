@@ -5,28 +5,26 @@
         <span>INICIO > CARPETA NUEVA > ARCHIVOS</span>
       </div>
       <div class="body_header_buttons">
-        <el-button type="secondary" :icon="Moon" @click="toggleTheme"
-          >ACTIVAR MODO OSCURO</el-button
-        >
+        <ThemeSwitcher/>
 
         <div class="order" v-show="showFilters">
           <el-button
             :class="{ 'order--active': getOrderType == 'list' }"
-            type="secondary"
+            type="text"
             @click="() => changeOrderType('list')"
             :icon="List"
             >LISTA</el-button
           >
           <el-button
             :class="{ 'order--active': getOrderType == 'grid' }"
-            type="secondary"
+            type="text"
             @click="() => changeOrderType('grid')"
             :icon="Grid"
             >CUADRICULA</el-button
           >
         </div>
 
-        <el-button type="secondary" :icon="Filter" @click="toggleFilter"
+        <el-button type="text" :icon="Filter" @click="toggleFilter"
           >ORDENAR POR</el-button
         >
       </div>
@@ -43,7 +41,7 @@
           <File :class="{ 'file--row': getOrderType == 'list' }" />
         </el-col>
       </el-row>
-      <el-empty v-else :image-size="200" :description="false">
+      <el-empty v-else :image-size="200" description="nothing">
           <p class="empty">
               Parece que no hay archivos. <br>
               Da click en 'Subir Archivos' <br>o arrastra un archivo para empezar
@@ -65,21 +63,19 @@
 import { defineComponent, ref } from "vue";
 import { Moon, Filter, List, Grid } from "@element-plus/icons";
 import { computed } from "@vue/reactivity";
-import { DARK_THEME } from "../../constants";
-import { switchTheme } from "../../utils";
 import File from "../Common/File.vue";
 import { useStore } from "vuex";
 import { key, orderType } from "../../store";
+import ThemeSwitcher from "../Common/ThemeSwitcher.vue";
 
 export default defineComponent({
-  components: { File },
+  components: { File, ThemeSwitcher },
   setup() {
     const showFilters = ref(false);
     const store = useStore(key);
     const files = ref(new Array(0).fill(0).map((x) => x))
 
     const toggleFilter = () => (showFilters.value = !showFilters.value);
-    const toggleTheme = () => switchTheme(DARK_THEME);
 
     const changeOrderType = (type: orderType) =>
       store.commit("changeOrderType", type);
@@ -88,7 +84,6 @@ export default defineComponent({
       files,
       showFilters,
       toggleFilter,
-      toggleTheme,
       changeOrderType,
       getOrderType,
       Grid,

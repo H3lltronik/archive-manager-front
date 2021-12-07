@@ -296,3 +296,11 @@
     margin-bottom: 40px;
   }
 }
+
+.error-box {
+  font-size: 13px;
+  padding: 10px 30px;
+  color: var(--white);
+  border-radius: 10px;
+  background-color: var(--red);
+}

@@ -13,7 +13,7 @@
             <LoginForm class="form"/>
 
             <router-link :to="ROUTES.REGISTER.route">
-                <el-button type="secondary" size="small" class="">CREAR CUENTA</el-button>
+                <el-button type="default" size="small" class="">CREAR CUENTA</el-button>
             </router-link>
         </div>
     </div>
