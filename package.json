@@ -8,12 +8,14 @@
   },
   "dependencies": {
     "@element-plus/icons": "^0.0.11",
+    "dropzone": "^6.0.0-beta.2",
     "element-plus": "^1.2.0-beta.5",
     "vue": "^3.2.16",
     "vue-router": "^4.0.12",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@types/dropzone": "^5.7.4",
     "@vitejs/plugin-vue": "^1.9.3",
     "sass": "^1.44.0",
     "typescript": "^4.4.3",

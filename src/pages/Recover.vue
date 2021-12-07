@@ -6,17 +6,17 @@
             </div>
 
             <div class="login_text">
-                <strong>Acceder</strong>
-                <p>Ingresa los datos de tu cuenta</p>
+                <strong>Recuperar contraseña</strong>
+                <p>Ingresa el correo electronico del usuario a recuperar</p>
             </div>
 
-            <LoginForm class="form"/>
+            <RecoverForm class="form"/>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import LoginForm from "../components/Forms/LoginForm.vue";
+import RecoverForm from "../components/Forms/RecoverForm.vue";
 
 export default {
     setup() {
@@ -28,6 +28,6 @@ export default {
             doLogin,
         };
     },
-    components: { LoginForm }
+    components: { RecoverForm }
 }
 </script>

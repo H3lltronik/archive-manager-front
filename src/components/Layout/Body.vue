@@ -32,19 +32,32 @@
       </div>
     </div>
     <div class="body_content">
-      <el-row :gutter="20">
+      <el-row :gutter="20" v-if="files.length > 0">
         <el-col
           :xs="getOrderType == 'list' ? 24 : 24"
           :md="getOrderType == 'list' ? 24 : 12"
           :lg="getOrderType == 'list' ? 24 : 8"
-          v-for="(item, index) in new Array(100).fill(0).map((x) => x)"
+          v-for="(item, index) in files"
           :key="index"
         >
           <File :class="{ 'file--row': getOrderType == 'list' }" />
         </el-col>
       </el-row>
+      <el-empty v-else :image-size="200" :description="false">
+          <p class="empty">
+              Parece que no hay archivos. <br>
+              Da click en 'Subir Archivos' <br>o arrastra un archivo para empezar
+            </p>
+      </el-empty>
     </div>
-    <div class="body_footer"></div>
+    <div class="body_footer">
+        <strong class="">
+            0 ARCHIVOS
+        </strong>
+        <strong class="">
+            0 ELEMENTOS SELECCIONADOS
+        </strong>
+    </div>
   </div>
 </template>
 
@@ -63,6 +76,7 @@ export default defineComponent({
   setup() {
     const showFilters = ref(false);
     const store = useStore(key);
+    const files = ref(new Array(0).fill(0).map((x) => x))
 
     const toggleFilter = () => (showFilters.value = !showFilters.value);
     const toggleTheme = () => switchTheme(DARK_THEME);
@@ -71,6 +85,7 @@ export default defineComponent({
       store.commit("changeOrderType", type);
     const getOrderType = computed(() => store.state.order);
     return {
+      files,
       showFilters,
       toggleFilter,
       toggleTheme,

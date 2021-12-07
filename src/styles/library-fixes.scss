@@ -14,7 +14,7 @@
 }
 
 .el-aside {
-    width: 300px !important;
+    width: 350px !important;
 }
 
 .el-aside {
@@ -25,4 +25,10 @@
 .el-button {
     font-weight: 400;
     color: var(--purple-dark);
+}
+
+.el-button--primary {
+    border: none;
+    color: var(--white);
+    background-color: var(--purple-dark);
 }
