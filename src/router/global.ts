@@ -5,6 +5,7 @@ import Layout from "../pages/Layout.vue";
 import Login from "../pages/Login.vue";
 import Recover from "../pages/Recover.vue";
 import Register from "../pages/Register.vue";
+import { store } from "../store";
 
 const routes: RouteRecordRaw[] = [
   {
@@ -40,6 +41,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const result = await checkUser();
+  store.commit('setUser', result.data);
 
   if (!result.error && !to.meta.isProtected) {
     next({ name: ROUTES.HOME.name });

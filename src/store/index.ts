@@ -8,6 +8,7 @@ export type State = {
   order: orderType,
   uploadModalOpened: boolean,
   theme: themeType,
+  user: User|null,
 }
 
 export const key: InjectionKey<Store<State>> = Symbol()
@@ -17,6 +18,7 @@ export const store = createStore<State>({
     order: 'grid',
     theme: 'theme-dark',
     uploadModalOpened: false,
+    user: null,
   },
   mutations: {
     changeOrderType (state, orderType: orderType) {
@@ -27,6 +29,10 @@ export const store = createStore<State>({
     },
     setTheme (state, payload: themeType) {
       state.theme = payload
+    },
+    setUser (state, payload: User) {
+      console.log("payload", payload)
+      state.user = payload
     },
   }
 })

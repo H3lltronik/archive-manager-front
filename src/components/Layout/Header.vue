@@ -14,7 +14,7 @@
 
     <el-dropdown>
       <div class="header_account">
-        <span>Account Name</span>
+        <span>{{ username }}</span>
         <div class="header_account_icon">
           <el-icon>
             <Avatar />
@@ -39,21 +39,30 @@ import { ref } from "@vue/reactivity";
 import { doLogout } from "../../api";
 import { useRouter } from "vue-router";
 import { ROUTES } from "../../constants";
+import { useStore } from "vuex";
+import { computed } from "vue";
+import { key } from "../../store";
+
 export default {
   setup() {
     const router = useRouter();
+    const store = useStore(key);
     const input2 = ref("");
-    
+
     const logout = async () => {
       const result = await doLogout();
       if (!result.error) {
-          router.push(ROUTES.LOGIN.route)
+        router.push(ROUTES.LOGIN.route);
       }
     };
+
+    const user = computed(() => store.state.user);
+    const username = user.value? user.value.name : 'Account Name'
 
     return {
       input2,
       logout,
+      username,
     };
   },
   components: { Calendar, Search, Avatar },
