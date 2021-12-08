@@ -8,15 +8,15 @@
     </el-button>
 
     <el-checkbox-group class="aside_filters" v-model="filters" fill="#ff00FF">
-      <el-checkbox :value="1" label="Archivos Nivel 1" text-color="#ff00FF" />
-      <el-checkbox :value="2" label="Archivos Nivel 2" />
-      <el-checkbox :value="3" label="Archivos Nivel 3" />
+      <el-checkbox :label="1">Archivos Nivel 1</el-checkbox>
+      <el-checkbox :label="2">Archivos Nivel 2</el-checkbox>
+      <el-checkbox :label="3">Archivos Nivel 3</el-checkbox>
     </el-checkbox-group>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, ref, watchEffect } from "vue";
 import { useStore } from "vuex";
 import { key } from "../../store";
 import { Plus } from "@element-plus/icons";
@@ -33,6 +33,10 @@ export default defineComponent({
       isModalOpened.value ? closeModal() : openModal();
 
     const filters = ref([]);
+
+    watchEffect(() => {
+      store.commit('setFilters', filters.value);
+    })
 
     return {
       filters,

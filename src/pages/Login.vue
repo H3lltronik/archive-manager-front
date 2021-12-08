@@ -41,7 +41,6 @@ export default {
     const router = useRouter();
     const isError = ref(false);
     const handleLoginSucceeded = () => {
-      console.log("good login");
       router.push(ROUTES.HOME.route);
     };
 

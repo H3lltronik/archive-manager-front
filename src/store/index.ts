@@ -11,6 +11,7 @@ export type State = {
   theme: themeType;
   user: User | null;
   files: FileCreationRes[];
+  filters: number[];
 };
 
 export const key: InjectionKey<Store<State>> = Symbol();
@@ -22,6 +23,7 @@ export const store = createStore<State>({
     uploadModalOpened: false,
     user: null,
     files: [],
+    filters: [],
   },
   mutations: {
     changeOrderType(state, orderType: orderType) {
@@ -34,18 +36,28 @@ export const store = createStore<State>({
       state.theme = payload;
     },
     setUser(state, payload: User) {
-      console.log("payload", payload);
       state.user = payload;
     },
     setFiles(state, payload: FileCreationRes[]) {
       state.files = payload;
     },
+    setFilters(state, payload: number[]) {
+      state.filters = payload;
+    },
   },
   actions: {
     async fetchFiles({ commit }, search = ' ') {
       const files = (await doSearch(search)).data ?? [];
-      console.log("params", search, files);
       commit("setFiles", files);
     },
   },
+  getters: {
+    getFilteredFiles({filters, files}) {
+      if (filters.length <= 0) return files
+
+      return files.filter(file => {
+        return filters.some(filter => filter == file.level)
+      })
+    },
+  }
 });

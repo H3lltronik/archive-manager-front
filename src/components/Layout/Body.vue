@@ -68,7 +68,7 @@ export default defineComponent({
   setup() {
     const showFilters = ref(false);
     const store = useStore(key);
-    const files = computed(() => store.state.files);
+    const files = computed(() => store.getters.getFilteredFiles);
 
     onMounted(async () => {
       store.dispatch("fetchFiles");

@@ -57,7 +57,6 @@ export default {
       }
     };
     const handleEnter = () => {
-      console.log("enter", search.value);
       store.dispatch("fetchFiles", search.value);
     }
 
