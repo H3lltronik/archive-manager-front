@@ -17,6 +17,16 @@
     width: 350px !important;
 }
 
+@media (max-width: $breakpoint-mobile) {
+    .el-aside {
+        z-index: 10;
+        left: 0 !important;
+        height: 100vh !important;
+        transform: translateX(-100%);
+        position: absolute !important;
+    }
+}
+
 .el-aside {
     overflow-y: hidden;
     @extend .elevation-right;

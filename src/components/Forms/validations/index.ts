@@ -18,8 +18,8 @@ export const loginRules = {
       trigger: "blur",
     },
     {
-      min: 5,
-      message: "La contraseña debe tener minimo 5 caracteres",
+      min: 2,
+      message: "La contraseña debe tener minimo 2 caracteres",
       trigger: "blur",
     },
   ],

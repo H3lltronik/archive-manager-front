@@ -73,7 +73,7 @@ export default defineComponent({
   setup() {
     const showFilters = ref(false);
     const store = useStore(key);
-    const files = ref(new Array(0).fill(0).map((x) => x))
+    const files = ref(new Array(100).fill(0).map((x) => x))
 
     const toggleFilter = () => (showFilters.value = !showFilters.value);
 

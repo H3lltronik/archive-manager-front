@@ -12,6 +12,18 @@
     --red: #bf334c;
 }
 
+:root[data-theme="theme-light"] {
+    --purple-light: #6200ee;
+    --purple-dark: #4a00b3;
+    --purple-text: #883ff1;
+    --blue-light: #4940f2;
+    --gray-text: #4e4d4d;
+    --gray-light: #eaeaea;
+    --black-text: #101010;
+    --white: #fff;
+    --red: #bf334c;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -38,9 +50,10 @@ body, #app {
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
+$breakpoint-mobile: 1000px;
+
 @import './library-fixes.scss';
 @import './app.scss';
-
 
 /* width */
 ::-webkit-scrollbar {
