@@ -11,8 +11,8 @@
                     </el-icon>
                 </div>
                 <div class="">
-                    <h3>Documento de Texto</h3>
-                    <span class="">Archivo Nivel 1</span>
+                    <h3>{{file.filename}}</h3>
+                    <span class="">Archivo Nivel {{file.level}}</span>
                 </div>
             </div>
 
@@ -21,35 +21,51 @@
             </div>
 
             <div class="file_description">
-                <p>Documento de Texto</p>
-                <p>Tamaño: 12KB</p>
+                <p>Subido por: <strong>{{file.user.name}}</strong></p>
+                <p>{{ getMimetypeName(file.mimetype) }}</p>
+                <p>Tamaño: {{ niceBytes(+file.size) }}</p>
             </div>
         </div>
 
         <div class="file_buttons">
-            <el-button type="default">
-                <span>DESCARGAR</span>
-            </el-button>
+            <a target="_blank" :href="`${API_URL}/${file.path}`">
+                <el-button type="default">
+                    <span>DESCARGAR</span>
+                </el-button>
+            </a>
             <el-button type="default">
                 <span>VISUALIZAR</span>
             </el-button>
         </div>
+        <!-- {{file}} -->
     </div>
 </template>
 
 <script lang="ts">
 import { Document } from '@element-plus/icons'
 import { defineComponent, ref } from 'vue'
+import { API_URL } from '../../constants'
+import { getMimetypeName, niceBytes } from '../../translations'
 
 export default defineComponent({
     components: {Document},
+    props: {
+        file: {
+            required: true,
+            default: () => {},
+            type: Object as () => FileCreationRes,
+        }
+    },
     setup() {
         const checked = ref(false)
-        const toggleChecked = () => checked.value = !checked.value
+        const toggleChecked = () => checked.value = !checked.value;
 
         return {
             checked,
+            API_URL,
             toggleChecked,
+            getMimetypeName,
+            niceBytes,
         }
   },
 })

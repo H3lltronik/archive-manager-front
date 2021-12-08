@@ -1,11 +1,9 @@
 <template>
   <div class="body">
     <div class="body_header">
-      <div class="body_header_route">
-        <span>INICIO > CARPETA NUEVA > ARCHIVOS</span>
-      </div>
+      <div class="body_header_route"></div>
       <div class="body_header_buttons">
-        <ThemeSwitcher/>
+        <ThemeSwitcher />
 
         <div class="order" v-show="showFilters">
           <el-button
@@ -35,32 +33,29 @@
           :xs="getOrderType == 'list' ? 24 : 24"
           :md="getOrderType == 'list' ? 24 : 12"
           :lg="getOrderType == 'list' ? 24 : 8"
-          v-for="(item, index) in files"
+          v-for="(file, index) in files"
           :key="index"
         >
-          <File :class="{ 'file--row': getOrderType == 'list' }" />
+          <File :file="file" :class="{ 'file--row': getOrderType == 'list' }" />
         </el-col>
       </el-row>
       <el-empty v-else :image-size="200" description="nothing">
-          <p class="empty">
-              Parece que no hay archivos. <br>
-              Da click en 'Subir Archivos' <br>o arrastra un archivo para empezar
-            </p>
+        <p class="empty">
+          Parece que no hay archivos. <br />
+          Da click en 'Subir Archivos' <br />o arrastra un archivo para empezar
+        </p>
       </el-empty>
     </div>
     <div class="body_footer">
-        <strong class="">
-            0 ARCHIVOS
-        </strong>
-        <strong class="">
-            0 ELEMENTOS SELECCIONADOS
-        </strong>
+      <strong class=""> 0 ARCHIVOS </strong>
+      <strong class=""> 0 ELEMENTOS SELECCIONADOS </strong>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { onMounted } from "@vue/runtime-core";
 import { Moon, Filter, List, Grid } from "@element-plus/icons";
 import { computed } from "@vue/reactivity";
 import File from "../Common/File.vue";
@@ -73,7 +68,11 @@ export default defineComponent({
   setup() {
     const showFilters = ref(false);
     const store = useStore(key);
-    const files = ref(new Array(100).fill(0).map((x) => x))
+    const files = computed(() => store.state.files);
+
+    onMounted(async () => {
+      store.dispatch("fetchFiles");
+    });
 
     const toggleFilter = () => (showFilters.value = !showFilters.value);
 
