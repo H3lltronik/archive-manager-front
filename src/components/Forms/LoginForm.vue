@@ -6,13 +6,6 @@
     class="login_form"
     label-position="top"
   >
-    <div class="error-box">
-      <span
-        >No se encontro el usuario especificado. <br />Revise sus
-        credenciales</span
-      >
-    </div>
-
     <el-form-item prop="email">
       <el-input
         v-model="form.email"
@@ -47,7 +40,8 @@ import { loginRules } from "./validations";
 import { doLogin as APILogin } from "../../api";
 
 export default {
-  setup() {
+  emits: ["wrongCredentials", "loginSucceeded"],
+  setup(_, { emit }) {
     const ruleForm = ref();
     const form = ref({
       name: "",
@@ -61,6 +55,11 @@ export default {
           if (!valid) return;
           const result = await APILogin(form.value.email, form.value.password);
           console.log("baer", result);
+          if (result.error) {
+            emit("wrongCredentials");
+          } else {
+            emit("loginSucceeded");
+          }
         });
     };
 

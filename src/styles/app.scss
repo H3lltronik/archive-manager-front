@@ -82,6 +82,25 @@
       background-color: var(--purple-dark);
     }
   }
+  &_account {
+    display: flex;
+    font-size: 17px;
+    color: var(--white);
+    align-items: center;
+    &_icon {
+      margin-left: 10px;
+      display: flex;
+      border-radius: 100%;
+      width: 20px; height: 20px;
+      background-color: var(--white);
+      i {
+        margin: auto;
+      }
+      svg {
+        color: var(--purple-dark);
+      }
+    }
+  }
 }
 
 .aside {
@@ -300,6 +319,7 @@
 .error-box {
   font-size: 13px;
   padding: 10px 30px;
+  margin: 0 20px;
   color: var(--white);
   border-radius: 10px;
   background-color: var(--red);
