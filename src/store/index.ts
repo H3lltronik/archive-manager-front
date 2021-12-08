@@ -1,6 +1,6 @@
 import { InjectionKey } from "vue";
 import { createStore, Store } from "vuex";
-import { getFiles } from "../api";
+import { doSearch, getFiles } from "../api";
 
 export type orderType = "grid" | "list";
 export type themeType = "theme-dark" | "theme-light";
@@ -42,9 +42,9 @@ export const store = createStore<State>({
     },
   },
   actions: {
-    async fetchFiles({ commit }, search) {
-      console.log("params", search)
-      const files = (await getFiles()).data ?? [];
+    async fetchFiles({ commit }, search = ' ') {
+      const files = (await doSearch(search)).data ?? [];
+      console.log("params", search, files);
       commit("setFiles", files);
     },
   },

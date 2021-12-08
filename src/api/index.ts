@@ -73,7 +73,9 @@ export async function doRegister(payload: ToCreateUser) {
 export async function doSearch(search: string) {
   return await resolve<FileResult[]>(async () =>
     axios
-      .get(`${API_URL}/files/search?search=${search}`)
+      .get(`${API_URL}/files/search?search=${search}`, {
+        withCredentials: true,
+      })
       .then((res) => res.data)
   );
 }
