@@ -10,6 +10,7 @@ export type State = {
   uploadModalOpened: boolean;
   loading: boolean;
   searchMode: boolean;
+  search: string;
   theme: themeType;
   user: User | null;
   allFiles: FileCreationRes[];
@@ -28,6 +29,7 @@ export const store = createStore<State>({
     uploadModalOpened: false,
     loading: true,
     searchMode: false,
+    search: "",
     user: null,
     filters: [],
     allFiles: [],
@@ -67,10 +69,13 @@ export const store = createStore<State>({
       state.filters = payload;
     },
     setSelectedFiles(state, payload: FileCreationRes[]) {
-      state.selectedFiles =payload;
+      state.selectedFiles = payload;
     },
     addSelectedFile(state, payload: FileCreationRes) {
       state.selectedFiles.push(payload);
+    },
+    setSearch(state, payload: string) {
+      state.search = payload;
     },
     removeSelectedFile(state, payload: FileCreationRes) {
       state.selectedFiles.splice(
@@ -80,7 +85,7 @@ export const store = createStore<State>({
     },
   },
   actions: {
-    async fetchAllFiles({ commit }, search = " ") {
+    async fetchAllFiles({ commit }) {
       commit("setLoading", true);
       const files = (await getFiles()).data ?? [];
       commit("setAllFiles", files);
@@ -91,6 +96,7 @@ export const store = createStore<State>({
       commit("setLoading", true);
       const files = (await doSearch(search)).data ?? [];
       commit("setFilesByContent", files);
+      commit("setSearch", search);
       commit("setSelectedFiles", []);
       commit("setLoading", false);
     },
@@ -98,6 +104,7 @@ export const store = createStore<State>({
       commit("setLoading", true);
       const files = (await doSearchByName(search)).data ?? [];
       commit("setFilesByName", files);
+      commit("setSearch", search);
       commit("setSelectedFiles", []);
       commit("setLoading", false);
     },

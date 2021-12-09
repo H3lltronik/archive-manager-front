@@ -11,14 +11,16 @@
       >
         <span>BORRAR</span>
       </el-button>
-      <el-button
-        style="margin-right: 10px"
-        type="default"
-        v-if="searchMode"
-        :icon="FullScreen"
-      >
-        <span>ANALIZAR</span>
-      </el-button>
+      <router-link :to="ROUTES.ANALISIS.route">
+        <el-button
+          style="margin-right: 10px"
+          type="default"
+          v-if="searchMode"
+          :icon="FullScreen"
+        >
+          <span>ANALIZAR</span>
+        </el-button>
+      </router-link>
       <strong class="">
         {{ selectedFiles.length }} ELEMENTOS SELECCIONADOS
       </strong>
@@ -30,6 +32,7 @@
 import { Delete, FullScreen } from "@element-plus/icons";
 import { computed, defineComponent, ref, watchEffect } from "vue";
 import { useStore } from "vuex";
+import { ROUTES } from "../../constants";
 import { key } from "../../store";
 
 export default defineComponent({
@@ -60,6 +63,7 @@ export default defineComponent({
       totalFiles,
       Delete,
       FullScreen,
+      ROUTES,
       searchMode,
     };
   },

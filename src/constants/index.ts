@@ -38,4 +38,11 @@ export const ROUTES = {
       isProtected: false,
     },
   },
+  ANALISIS: {
+    name: "Analisis",
+    route: "/analisis",
+    meta: {
+      isProtected: true,
+    },
+  },
 };

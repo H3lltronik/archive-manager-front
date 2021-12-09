@@ -5,6 +5,7 @@ import Layout from "../pages/Layout.vue";
 import Login from "../pages/Login.vue";
 import Recover from "../pages/Recover.vue";
 import Register from "../pages/Register.vue";
+import AnalisisPage from "../pages/AnalisisPage.vue";
 import { store } from "../store";
 
 const routes: RouteRecordRaw[] = [
@@ -31,6 +32,12 @@ const routes: RouteRecordRaw[] = [
     name: ROUTES.HOME.name,
     component: Layout,
     meta: ROUTES.HOME.meta,
+  },
+  {
+    path: ROUTES.ANALISIS.route,
+    name: ROUTES.ANALISIS.name,
+    component: AnalisisPage,
+    meta: ROUTES.ANALISIS.meta,
   },
 ];
 
