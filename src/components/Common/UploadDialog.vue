@@ -83,7 +83,9 @@ export default defineComponent({
         return;
       } else {
         showNotification("Hecho", "Archivo subido correctamente", "success");
-        store.dispatch("fetchFiles");
+        store.dispatch("fetchAllFiles");
+        selectedFile.value = null;
+        handleClose();
       }
       
     };

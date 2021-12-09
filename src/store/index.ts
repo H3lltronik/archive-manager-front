@@ -1,6 +1,6 @@
 import { InjectionKey } from "vue";
 import { createStore, Store } from "vuex";
-import { doSearch, doSearchByName, getFiles } from "../api";
+import { deleteFile, doSearch, doSearchByName, getFiles } from "../api";
 
 export type orderType = "grid" | "list";
 export type themeType = "theme-dark" | "theme-light";
@@ -104,6 +104,19 @@ export const store = createStore<State>({
       const files = (await doSearchByName(search)).data ?? [];
       commit("setFilesByName", files);
       commit("setSelectedFiles", []);
+      commit("setLoading", false);
+    },
+    async deleteSelectedFiles({ commit, state, dispatch }) {
+      commit("setLoading", true);
+      for (const file of state.selectedFiles) {
+        const delResult = await deleteFile(file.id);
+      }
+      
+      dispatch('fetchAllFiles');
+      if (state.searchMode) {
+        dispatch('fetchFilesByContent', state.search);
+        dispatch('fetchFilesByName', state.search);
+      }
       commit("setLoading", false);
     },
   },

@@ -129,3 +129,11 @@ export async function getFile(id: string) {
     axios.get(`${API_URL}/files/${id}`).then((res) => res.data)
   );
 }
+
+export async function deleteFile(id: number) {
+  return await resolve<FileCreationRes>(async () =>
+    axios.delete(`${API_URL}/files/${id}`, {
+      withCredentials: true,
+    }).then((res) => res.data)
+  );
+}

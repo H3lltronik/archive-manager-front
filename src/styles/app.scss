@@ -50,10 +50,6 @@
     .el-empty__description {
       display: none;
     }
-    .empty {
-      font-size: 14px;
-      color: var(--gray-text);
-    }
   }
   &_footer {
     height: 80px;
@@ -335,7 +331,10 @@
 }
 
 .analisis {
+  height: 100vh;
   text-align: center;
+  color: var(--black-text);
+  background-color: var(--background);
   h1 {
     font-size: 30px;
   }
@@ -347,7 +346,7 @@
   &_header {
     gap: 30px;
     display: flex;
-    margin-top: 20px;
+    margin-top: -7px;
     align-items: center;
     justify-content: center;
   }
@@ -355,4 +354,15 @@
     width: 500px;
     max-height: 400px !important;
   }
+
+
+}
+
+.empty {
+  font-size: 14px;
+  color: var(--gray-text);
+}
+
+.search-results {
+  
 }

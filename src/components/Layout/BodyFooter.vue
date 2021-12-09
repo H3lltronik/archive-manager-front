@@ -7,6 +7,7 @@
         style="margin-right: 10px"
         type="default"
         v-if="selectedFiles.length > 0"
+        @click="deleteArchive"
         :icon="Delete"
       >
         <span>BORRAR</span>
@@ -30,9 +31,12 @@
 
 <script lang="ts">
 import { Delete, FullScreen } from "@element-plus/icons";
+import { ElMessageBox } from "element-plus";
 import { computed, defineComponent, ref, watchEffect } from "vue";
 import { useStore } from "vuex";
+import { deleteFile } from "../../api";
 import { ROUTES } from "../../constants";
+import { showNotification } from "../../notifications";
 import { key } from "../../store";
 
 export default defineComponent({
@@ -63,6 +67,22 @@ export default defineComponent({
       const strWindowFeatures = `location=yes,height=${window.innerHeight},width=${window.innerWidth},scrollbars=yes,status=yes`;
       window.open(URL, "_blank", strWindowFeatures);
     };
+    const deleteArchive = () => {
+      ElMessageBox.confirm(
+        "Estas seguro de que deseas eliminar?",
+        "Confirmar accion",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "warning",
+        }
+      )
+        .then(() => {
+          store.dispatch("deleteSelectedFiles");
+          showNotification("Hecho", "Se estan borrando los archivos", "info");
+        })
+        .catch(() => {});
+    };
 
     return {
       selectedFiles,
@@ -71,6 +91,7 @@ export default defineComponent({
       FullScreen,
       ROUTES,
       searchMode,
+      deleteArchive,
     };
   },
 });

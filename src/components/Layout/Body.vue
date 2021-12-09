@@ -44,13 +44,7 @@
             />
           </el-col>
         </el-row>
-        <el-empty v-else :image-size="200" description="nothing">
-          <p class="empty">
-            Parece que no hay archivos. <br />
-            Da click en 'Subir Archivos' <br />o arrastra un archivo para
-            empezar
-          </p>
-        </el-empty>
+        <Empty v-else/>
       </div>
     </div>
     <BodyFooter/>
@@ -68,9 +62,10 @@ import { key, orderType } from "../../store";
 import ThemeSwitcher from "../Common/ThemeSwitcher.vue";
 import SearchResults from "./SearchResults.vue";
 import BodyFooter from "./BodyFooter.vue";
+import Empty from "../Common/Empty.vue";
 
 export default defineComponent({
-  components: { File, ThemeSwitcher, SearchResults, BodyFooter },
+  components: { File, ThemeSwitcher, SearchResults, BodyFooter, Empty },
   setup() {
     const showFilters = ref(false);
     const store = useStore(key);
