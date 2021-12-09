@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div id="input-zone" class="upload-modal_indication">
-        <span>Arrastra un archivo o da click para seleccionar un archivo</span>
+      <span style="pointer-events: none;">Arrastra un archivo o da click para seleccionar un archivo</span>
     </div>
 
     <input type="file" accept="*" ref="inputRef" hidden />
@@ -14,7 +14,8 @@ import { computed, defineComponent, onMounted, ref } from "vue";
 
 export default defineComponent({
   components: {},
-  setup() {
+  emits: ['fileSelected'],
+  setup(_, {emit}) {
     const inputRef = ref(null);
     const dropzone = ref<Dropzone|null>(null);
     
@@ -26,7 +27,7 @@ export default defineComponent({
             url: 'https://www.dropzone.dev/js/', // IGNORAR LA URL, LA LIBRERIA ME LO PEDIA xd
             autoProcessQueue: false,
             addedfile: file => {
-                console.log("ola?" ,file)
+                emit('fileSelected',file);
             }
         })
     })

@@ -81,9 +81,17 @@ export async function doSearch(search: string) {
 }
 
 export async function doFileUpload(file: any) {
-  return await resolve(async () =>
+  const params = new FormData();
+  params.append("file", file);
+
+  return await resolve<FileUploadRes>(async () =>
     axios
-      .post(`${API_URL}/files/file-upload`, { file }, { withCredentials: true })
+      .post(`${API_URL}/files/file-upload`, params, {
+        withCredentials: true,
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      })
       .then((res) => res.data)
   );
 }

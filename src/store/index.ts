@@ -20,7 +20,7 @@ export const store = createStore<State>({
   state: {
     order: "grid",
     theme: "theme-dark",
-    uploadModalOpened: false,
+    uploadModalOpened: true,
     user: null,
     files: [],
     filters: [],
