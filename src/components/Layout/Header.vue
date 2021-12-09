@@ -48,7 +48,14 @@ export default {
   setup() {
     const router = useRouter();
     const store = useStore(key);
-    const search = ref("");
+    const search = computed<string>({
+    get() {
+      return store.state.search
+    },
+    set(value) {
+      store.commit("setSearch", value)
+    }
+})
 
     const logout = async () => {
       const result = await doLogout();

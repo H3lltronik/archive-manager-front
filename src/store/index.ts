@@ -96,7 +96,6 @@ export const store = createStore<State>({
       commit("setLoading", true);
       const files = (await doSearch(search)).data ?? [];
       commit("setFilesByContent", files);
-      commit("setSearch", search);
       commit("setSelectedFiles", []);
       commit("setLoading", false);
     },
@@ -104,7 +103,6 @@ export const store = createStore<State>({
       commit("setLoading", true);
       const files = (await doSearchByName(search)).data ?? [];
       commit("setFilesByName", files);
-      commit("setSearch", search);
       commit("setSelectedFiles", []);
       commit("setLoading", false);
     },

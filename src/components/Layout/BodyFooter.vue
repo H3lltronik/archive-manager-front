@@ -58,6 +58,12 @@ export default defineComponent({
       }
     });
 
+    const goToAnalisis = () => {
+      const URL = ROUTES.ANALISIS.route;
+      const strWindowFeatures = `location=yes,height=${window.innerHeight},width=${window.innerWidth},scrollbars=yes,status=yes`;
+      window.open(URL, "_blank", strWindowFeatures);
+    };
+
     return {
       selectedFiles,
       totalFiles,
