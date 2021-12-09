@@ -34,7 +34,8 @@
 
 .el-button {
     font-weight: 400;
-    color: var(--purple-dark);
+    color: var(--button-text);
+    background-color: var(--button-background);
 }
 
 .el-button--primary {

@@ -26,12 +26,12 @@ export default defineComponent({
     const theme = computed(() => store.state.theme);
 
     const data = computed(() => {
-      if (store.state.theme == DARK_THEME) {
+      if (store.state.theme == LIGHT_THEME) {
         return {
           icon: Moon,
           text: "MODO OSCURO",
         };
-      } else if (store.state.theme == LIGHT_THEME) {
+      } else if (store.state.theme == DARK_THEME) {
         return {
           icon: Sunny,
           text: "MODO LIGHT",

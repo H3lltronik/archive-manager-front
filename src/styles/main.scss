@@ -1,17 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
 
-:root[data-theme="theme-dark"] {
-    --purple-light: #6200ee;
-    --purple-dark: #4a00b3;
-    --purple-text: #883ff1;
-    --blue-light: #4940f2;
-    --gray-text: #4e4d4d;
-    --gray-light: #eaeaea;
-    --black-text: #101010;
-    --white: #fff;
-    --red: #bf334c;
-}
-
 :root[data-theme="theme-light"] {
     --purple-light: #6200ee;
     --purple-dark: #4a00b3;
@@ -22,6 +10,26 @@
     --black-text: #101010;
     --white: #fff;
     --red: #bf334c;
+    --background: #fff;
+    --file-background: #fff;
+    --button-text: #4a00b3;
+    --button-background: #fff;
+}
+
+:root[data-theme="theme-dark"] {
+    --purple-light: #6200ee;
+    --purple-dark: #4a00b3;
+    --purple-text: #883ff1;
+    --blue-light: #4940f2;
+    --gray-text: #4e4d4d;
+    --gray-light: #eaeaea;
+    --black-text: #101010;
+    --white: #fff;
+    --red: #bf334c;
+    --background: #1e1e1e;
+    --file-background: #323233;
+    --button-text: #fff;
+    --button-background: #939393;
 }
 
 * {

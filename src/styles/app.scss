@@ -1,17 +1,18 @@
 .body {
   height: 100%;
-  max-height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
+  max-height: calc(100vh - 60px);
   &_header {
     height: 60px;
     display: flex;
     flex: 0 0 auto;
-    align-items: center;
-    padding-right: 20px;
     padding-left: 20px;
+    padding-right: 20px;
+    align-items: center;
     @extend .elevation;
     justify-content: space-between;
+    background-color: var(--background);
     &_buttons {
       &,
       .order {
@@ -30,6 +31,7 @@
     overflow-y: auto;
     position: relative;
     overflow-x: hidden;
+    background-color: var(--background);
     .el-row {
       max-width: 1200px;
       margin: 0 auto !important;
@@ -62,6 +64,7 @@
     align-items: center;
     color: var(--purple-light);
     justify-content: space-between;
+    background-color: var(--background);
     border-top: 1px solid rgba(gray, 0.3);
   }
 }
@@ -110,10 +113,9 @@
   display: flex;
   margin-top: 7px;
   padding-top: 40px;
-
   align-items: center;
   flex-direction: column;
-  background-color: var(--white);
+  background-color: var(--background);
   border-right: 1px solid rgba(gray, 0.5);
   &_button {
     border: none;
@@ -157,8 +159,8 @@
   overflow: hidden;
   position: relative;
   @extend .transition;
-  background-color: var(--white);
   border: 1px solid rgba(gray, 0.2);
+  background-color: var(--file-background);
   &:hover {
     transform: translate(0px, -2px);
     @extend .elevation;

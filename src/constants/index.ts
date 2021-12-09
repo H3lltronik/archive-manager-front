@@ -3,6 +3,12 @@ export const LIGHT_THEME = "theme-light";
 
 export const API_URL = "http://192.168.100.3:4000";
 
+export const SUPPORTED_MIMETYPES = [
+  "application/pdf",
+  "text/plain",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+];
+
 export const ROUTES = {
   LOGIN: {
     name: "Login",

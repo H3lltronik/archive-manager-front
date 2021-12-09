@@ -80,6 +80,16 @@ export async function doSearch(search: string) {
   );
 }
 
+export async function doSearchByName(search: string) {
+  return await resolve<FileResult[]>(async () =>
+    axios
+      .get(`${API_URL}/files/byName?search=${search}`, {
+        withCredentials: true,
+      })
+      .then((res) => res.data)
+  );
+}
+
 export async function doFileUpload(file: any) {
   const params = new FormData();
   params.append("file", file);

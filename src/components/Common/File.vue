@@ -33,7 +33,7 @@
                     <span>DESCARGAR</span>
                 </el-button>
             </a>
-            <el-button type="default">
+            <el-button type="default" v-if="isSupported(file)">
                 <span>VISUALIZAR</span>
             </el-button>
         </div>
@@ -44,7 +44,7 @@
 <script lang="ts">
 import { Document } from '@element-plus/icons'
 import { defineComponent, ref } from 'vue'
-import { API_URL } from '../../constants'
+import { API_URL, SUPPORTED_MIMETYPES } from '../../constants'
 import { getMimetypeName, niceBytes } from '../../translations'
 
 export default defineComponent({
@@ -59,6 +59,7 @@ export default defineComponent({
     setup() {
         const checked = ref(false)
         const toggleChecked = () => checked.value = !checked.value;
+        const isSupported = (file: FileCreationRes) => SUPPORTED_MIMETYPES.find(i => i == file.mimetype);
 
         return {
             checked,
@@ -66,6 +67,7 @@ export default defineComponent({
             toggleChecked,
             getMimetypeName,
             niceBytes,
+            isSupported,
         }
   },
 })
