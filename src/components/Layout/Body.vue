@@ -28,28 +28,32 @@
       </div>
     </div>
     <div class="body_content" v-loading="loading">
-      <el-row :gutter="20" v-if="files.length > 0">
-        <el-col
-          :xs="getOrderType == 'list' ? 24 : 24"
-          :md="getOrderType == 'list' ? 24 : 12"
-          :lg="getOrderType == 'list' ? 24 : 8"
-          v-for="(file, index) in files"
-          :key="index"
-        >
-          <File :file="file" :class="{ 'file--row': getOrderType == 'list' }" />
-        </el-col>
-      </el-row>
-      <el-empty v-else :image-size="200" description="nothing">
-        <p class="empty">
-          Parece que no hay archivos. <br />
-          Da click en 'Subir Archivos' <br />o arrastra un archivo para empezar
-        </p>
-      </el-empty>
+      <SearchResults v-if="searchMode"/>
+      <div class="" v-else>
+        <el-row :gutter="20" v-if="allFiles.length > 0">
+          <el-col
+            :xs="getOrderType == 'list' ? 24 : 24"
+            :md="getOrderType == 'list' ? 24 : 12"
+            :lg="getOrderType == 'list' ? 24 : 8"
+            v-for="(file, index) in allFiles"
+            :key="index"
+          >
+            <File
+              :file="file"
+              :class="{ 'file--row': getOrderType == 'list' }"
+            />
+          </el-col>
+        </el-row>
+        <el-empty v-else :image-size="200" description="nothing">
+          <p class="empty">
+            Parece que no hay archivos. <br />
+            Da click en 'Subir Archivos' <br />o arrastra un archivo para
+            empezar
+          </p>
+        </el-empty>
+      </div>
     </div>
-    <div class="body_footer">
-      <strong class=""> 0 ARCHIVOS </strong>
-      <strong class=""> 0 ELEMENTOS SELECCIONADOS </strong>
-    </div>
+    <BodyFooter/>
   </div>
 </template>
 
@@ -62,25 +66,20 @@ import File from "../Common/File.vue";
 import { useStore } from "vuex";
 import { key, orderType } from "../../store";
 import ThemeSwitcher from "../Common/ThemeSwitcher.vue";
+import SearchResults from "./SearchResults.vue";
+import BodyFooter from "./BodyFooter.vue";
 
 export default defineComponent({
-  components: { File, ThemeSwitcher },
+  components: { File, ThemeSwitcher, SearchResults, BodyFooter },
   setup() {
     const showFilters = ref(false);
     const store = useStore(key);
-    const files = computed(() => store.getters.getFilteredFiles);
     const loading = computed(() => store.state.loading);
+    const searchMode = computed(() => store.state.searchMode);
 
+    const allFiles = computed(() => store.getters.getFilteredFiles);
     onMounted(async () => {
-      store.dispatch("fetchFiles");
-    });
-
-    watchEffect(() => {
-      if (!loading.value) {
-        if (files.value.length <= 0) {
-          store.commit("setUploadModal", true);
-        }
-      }
+      store.dispatch("fetchAllFiles");
     });
 
     const toggleFilter = () => (showFilters.value = !showFilters.value);
@@ -89,11 +88,12 @@ export default defineComponent({
       store.commit("changeOrderType", type);
     const getOrderType = computed(() => store.state.order);
     return {
-      files,
+      allFiles,
       loading,
       showFilters,
       toggleFilter,
       changeOrderType,
+      searchMode,
       getOrderType,
       Grid,
       Moon,

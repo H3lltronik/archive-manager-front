@@ -115,8 +115,12 @@ export async function doCreateFile(payload: ToCreateFile) {
 }
 
 export async function getFiles() {
-  return await resolve<FileCreationRes[]>(async () =>
-    axios.get(`${API_URL}/files`).then((res) => res.data)
+  return await resolve<FileResult[]>(async () =>
+    axios
+      .get(`${API_URL}/files/getAll`, {
+        withCredentials: true,
+      })
+      .then((res) => res.data)
   );
 }
 

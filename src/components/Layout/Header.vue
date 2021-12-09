@@ -57,7 +57,12 @@ export default {
       }
     };
     const handleEnter = () => {
-      store.dispatch("fetchFiles", search.value);
+      store.dispatch("fetchFilesByName", search.value);
+      store.dispatch("fetchFilesByContent", search.value);
+      if (search.value.length <= 0)
+        store.commit("setSearchMode", false);
+      else
+        store.commit("setSearchMode", true);
     }
 
     const user = computed(() => store.state.user);

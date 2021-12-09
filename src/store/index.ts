@@ -9,9 +9,13 @@ export type State = {
   order: orderType;
   uploadModalOpened: boolean;
   loading: boolean;
+  searchMode: boolean;
   theme: themeType;
   user: User | null;
-  files: FileCreationRes[];
+  allFiles: FileCreationRes[];
+  selectedFiles: FileCreationRes[];
+  filesByName: FileCreationRes[];
+  filesByContent: FileCreationRes[];
   filters: number[];
 };
 
@@ -23,9 +27,13 @@ export const store = createStore<State>({
     theme: "theme-dark",
     uploadModalOpened: false,
     loading: true,
+    searchMode: false,
     user: null,
-    files: [],
     filters: [],
+    allFiles: [],
+    selectedFiles: [],
+    filesByName: [],
+    filesByContent: [],
   },
   mutations: {
     changeOrderType(state, orderType: orderType) {
@@ -37,34 +45,84 @@ export const store = createStore<State>({
     setLoading(state, payload: boolean) {
       state.loading = payload;
     },
+    setSearchMode(state, payload: boolean) {
+      state.searchMode = payload;
+    },
     setTheme(state, payload: themeType) {
       state.theme = payload;
     },
     setUser(state, payload: User) {
       state.user = payload;
     },
-    setFiles(state, payload: FileCreationRes[]) {
-      state.files = payload;
+    setAllFiles(state, payload: FileCreationRes[]) {
+      state.allFiles = payload;
+    },
+    setFilesByName(state, payload: FileCreationRes[]) {
+      state.filesByName = payload;
+    },
+    setFilesByContent(state, payload: FileCreationRes[]) {
+      state.filesByContent = payload;
     },
     setFilters(state, payload: number[]) {
       state.filters = payload;
     },
+    setSelectedFiles(state, payload: FileCreationRes[]) {
+      state.selectedFiles =payload;
+    },
+    addSelectedFile(state, payload: FileCreationRes) {
+      state.selectedFiles.push(payload);
+    },
+    removeSelectedFile(state, payload: FileCreationRes) {
+      state.selectedFiles.splice(
+        state.selectedFiles.findIndex((file) => file.id == payload.id),
+        1
+      );
+    },
   },
   actions: {
-    async fetchFiles({ commit }, search = ' ') {
-      commit('setLoading', true);
+    async fetchAllFiles({ commit }, search = " ") {
+      commit("setLoading", true);
+      const files = (await getFiles()).data ?? [];
+      commit("setAllFiles", files);
+      commit("setSelectedFiles", []);
+      commit("setLoading", false);
+    },
+    async fetchFilesByContent({ commit }, search = " ") {
+      commit("setLoading", true);
+      const files = (await doSearch(search)).data ?? [];
+      commit("setFilesByContent", files);
+      commit("setSelectedFiles", []);
+      commit("setLoading", false);
+    },
+    async fetchFilesByName({ commit }, search = " ") {
+      commit("setLoading", true);
       const files = (await doSearchByName(search)).data ?? [];
-      commit("setFiles", files);
-      commit('setLoading', false);
+      commit("setFilesByName", files);
+      commit("setSelectedFiles", []);
+      commit("setLoading", false);
     },
   },
   getters: {
-    getFilteredFiles({filters, files}) {
-      if (filters.length <= 0) return files
+    getFilteredFiles({ filters, allFiles }) {
+      if (filters.length <= 0) return allFiles;
 
-      return files.filter(file => {
-        return filters.some(filter => filter == file.level)
-      })
+      return allFiles.filter((file) => {
+        return filters.some((filter) => filter == file.level);
+      });
     },
-  }
+    getFilteredFilesByContent({ filters, filesByContent }) {
+      if (filters.length <= 0) return filesByContent;
+
+      return filesByContent.filter((file) => {
+        return filters.some((filter) => filter == file.level);
+      });
+    },
+    getFilteredFilesByName({ filters, filesByName }) {
+      if (filters.length <= 0) return filesByName;
+
+      return filesByName.filter((file) => {
+        return filters.some((filter) => filter == file.level);
+      });
+    },
+  },
 });

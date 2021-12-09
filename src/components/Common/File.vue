@@ -44,7 +44,9 @@
 <script lang="ts">
 import { Document } from '@element-plus/icons'
 import { defineComponent, ref } from 'vue'
+import { useStore } from 'vuex'
 import { API_URL, SUPPORTED_MIMETYPES } from '../../constants'
+import { key } from '../../store'
 import { getMimetypeName, niceBytes } from '../../translations'
 
 export default defineComponent({
@@ -56,9 +58,17 @@ export default defineComponent({
             type: Object as () => FileCreationRes,
         }
     },
-    setup() {
+    setup(props) {
         const checked = ref(false)
-        const toggleChecked = () => checked.value = !checked.value;
+        const store = useStore(key);
+        const toggleChecked = () => {
+            checked.value = !checked.value
+            if (checked.value) {
+                store.commit('addSelectedFile', props.file)
+            } else {
+                store.commit('removeSelectedFile', props.file)
+            }
+        };
         const isSupported = (file: FileCreationRes) => SUPPORTED_MIMETYPES.find(i => i == file.mimetype);
 
         return {
