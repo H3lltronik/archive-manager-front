@@ -3,6 +3,7 @@ type ToCreateUser = {
   username: string;
   password: string;
   confirmPassword: string;
+  level: number;
 };
 
 type ToLogin = {

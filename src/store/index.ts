@@ -8,6 +8,7 @@ export type themeType = "theme-dark" | "theme-light";
 export type State = {
   order: orderType;
   uploadModalOpened: boolean;
+  loading: boolean;
   theme: themeType;
   user: User | null;
   files: FileCreationRes[];
@@ -20,7 +21,8 @@ export const store = createStore<State>({
   state: {
     order: "grid",
     theme: "theme-dark",
-    uploadModalOpened: true,
+    uploadModalOpened: false,
+    loading: true,
     user: null,
     files: [],
     filters: [],
@@ -31,6 +33,9 @@ export const store = createStore<State>({
     },
     setUploadModal(state, payload: boolean) {
       state.uploadModalOpened = payload;
+    },
+    setLoading(state, payload: boolean) {
+      state.loading = payload;
     },
     setTheme(state, payload: themeType) {
       state.theme = payload;
@@ -47,8 +52,10 @@ export const store = createStore<State>({
   },
   actions: {
     async fetchFiles({ commit }, search = ' ') {
+      commit('setLoading', true);
       const files = (await doSearch(search)).data ?? [];
       commit("setFiles", files);
+      commit('setLoading', false);
     },
   },
   getters: {

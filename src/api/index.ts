@@ -65,7 +65,7 @@ export async function doLogout() {
 export async function doRegister(payload: ToCreateUser) {
   return await resolve<User>(async () =>
     axios
-      .post(`${API_URL}/user`, { payload }, { withCredentials: true })
+      .post(`${API_URL}/user`, { ...payload }, { withCredentials: true })
       .then((res) => res.data)
   );
 }

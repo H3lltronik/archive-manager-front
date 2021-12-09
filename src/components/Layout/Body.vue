@@ -27,7 +27,7 @@
         >
       </div>
     </div>
-    <div class="body_content">
+    <div class="body_content" v-loading="loading">
       <el-row :gutter="20" v-if="files.length > 0">
         <el-col
           :xs="getOrderType == 'list' ? 24 : 24"
@@ -55,7 +55,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { onMounted } from "@vue/runtime-core";
+import { onMounted, watchEffect } from "@vue/runtime-core";
 import { Moon, Filter, List, Grid } from "@element-plus/icons";
 import { computed } from "@vue/reactivity";
 import File from "../Common/File.vue";
@@ -69,9 +69,18 @@ export default defineComponent({
     const showFilters = ref(false);
     const store = useStore(key);
     const files = computed(() => store.getters.getFilteredFiles);
+    const loading = computed(() => store.state.loading);
 
     onMounted(async () => {
       store.dispatch("fetchFiles");
+    });
+
+    watchEffect(() => {
+      if (!loading.value) {
+        if (files.value.length <= 0) {
+          store.commit("setUploadModal", true);
+        }
+      }
     });
 
     const toggleFilter = () => (showFilters.value = !showFilters.value);
@@ -81,6 +90,7 @@ export default defineComponent({
     const getOrderType = computed(() => store.state.order);
     return {
       files,
+      loading,
       showFilters,
       toggleFilter,
       changeOrderType,

@@ -33,7 +33,14 @@ export const registerRules = {
       trigger: "blur",
     },
   ],
-  email: [
+  level: [
+    {
+      required: true,
+      message: "Este campo es requerido",
+      trigger: "blur",
+    },
+  ],
+  username: [
     {
       required: true,
       message: "Este campo es requerido",
@@ -57,6 +64,7 @@ export const registerRules = {
       trigger: "blur",
     },
   ],
+  confirmPassword: {},
 };
 
 export const requestRecoverRules = {
