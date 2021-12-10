@@ -11,19 +11,25 @@
             type="text"
             @click="() => changeOrderType('list')"
             :icon="List"
-            >LISTA</el-button
+            >
+              <span class="hide-mobile">LISTA</span>
+            </el-button
           >
           <el-button
             :class="{ 'order--active': getOrderType == 'grid' }"
             type="text"
             @click="() => changeOrderType('grid')"
             :icon="Grid"
-            >CUADRICULA</el-button
+            >
+              <span class="hide-mobile">CUADRICULA</span>
+            </el-button
           >
         </div>
 
         <el-button type="text" :icon="Filter" @click="toggleFilter"
-          >ORDENAR POR</el-button
+          >
+            <span class="hide-mobile">ORDENAR POR</span>
+          </el-button
         >
       </div>
     </div>

@@ -1,41 +1,42 @@
 <template>
-  <div class="header">
-    <div class="header_logo">
-      <h1>Logo</h1>
-    </div>
-
-    <div class="header_search">
-      <el-input
-        v-model="search"
-        placeholder="Type something"
-        @keydown.enter="handleEnter"
-        :suffix-icon="Search"
-      />
-    </div>
-
-    <el-dropdown>
-      <div class="header_account">
-        <span>{{ username }}</span>
-        <div class="header_account_icon">
-          <el-icon>
-            <Avatar />
-          </el-icon>
-        </div>
+  <div class="">
+    <div class="header">
+      <div class="header_logo">
+        <h1>Logo</h1>
       </div>
-      <template #dropdown>
-        <el-dropdown-menu>
-          <el-dropdown-item @click="logout">Logout</el-dropdown-item>
-        </el-dropdown-menu>
-      </template>
-    </el-dropdown>
+
+      <div class="header_search">
+        <el-input v-model="search" placeholder="Type something" @keydown.enter="handleEnter" :suffix-icon="Search"/>
+      </div>
+      <div class="header_search_mobile">
+        <el-button :icon="searchOpen? Close : Search" round size="small" @click="searchOpen = !searchOpen"></el-button>
+      </div>
+
+      <el-dropdown>
+        <div class="header_account">
+          <span>{{ username }}</span>
+          <div class="header_account_icon">
+            <el-icon>
+              <Avatar />
+            </el-icon>
+          </div>
+        </div>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item @click="logout">Logout</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
+    <div class="header_search_mobile_input " :class="{'header_search_mobile--open': searchOpen}">
+      <el-input v-model="search" placeholder="Type something" @keydown.enter="handleEnter"/>
+      <el-button :icon="Search" round size="small" @click="handleEnter"></el-button>
+    </div>
   </div>
 </template>
 
-<script setup lang="ts">
-</script>
-
 <script lang="ts">
-import { Calendar, Search, Avatar } from "@element-plus/icons";
+import { Calendar, Search, Avatar, Close } from "@element-plus/icons";
 import { ref } from "@vue/reactivity";
 import { doLogout } from "../../api";
 import { useRouter } from "vue-router";
@@ -48,14 +49,15 @@ export default {
   setup() {
     const router = useRouter();
     const store = useStore(key);
+    const searchOpen = ref(false); // mobile search
     const search = computed<string>({
-    get() {
-      return store.state.search
-    },
-    set(value) {
-      store.commit("setSearch", value)
-    }
-})
+      get() {
+        return store.state.search;
+      },
+      set(value) {
+        store.commit("setSearch", value);
+      },
+    });
 
     const logout = async () => {
       const result = await doLogout();
@@ -66,11 +68,9 @@ export default {
     const handleEnter = () => {
       store.dispatch("fetchFilesByName", search.value);
       store.dispatch("fetchFilesByContent", search.value);
-      if (search.value.length <= 0)
-        store.commit("setSearchMode", false);
-      else
-        store.commit("setSearchMode", true);
-    }
+      if (search.value.length <= 0) store.commit("setSearchMode", false);
+      else store.commit("setSearchMode", true);
+    };
 
     const user = computed(() => store.state.user);
     const username = user.value ? user.value.name : "Account Name";
@@ -78,8 +78,10 @@ export default {
     return {
       search,
       logout,
+      Close,
       username,
       handleEnter,
+      searchOpen,
       Calendar,
       Search,
       Avatar,

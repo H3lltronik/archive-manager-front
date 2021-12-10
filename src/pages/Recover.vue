@@ -11,12 +11,16 @@
             </div>
 
             <RecoverForm class="form"/>
+            <router-link :to="ROUTES.LOGIN.route">
+                <el-button>Volver</el-button>
+            </router-link>
         </div>
     </div>
 </template>
 
 <script lang="ts">
 import RecoverForm from "../components/Forms/RecoverForm.vue";
+import { ROUTES } from "../constants";
 
 export default {
     setup() {
@@ -26,6 +30,7 @@ export default {
         return {
             recoverPassword,
             doLogin,
+            ROUTES,
         };
     },
     components: { RecoverForm }

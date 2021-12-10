@@ -1,6 +1,8 @@
 <template>
   <el-button type="text" :icon="data.icon" @click="toggleTheme">
-    ACTIVAR {{ data.text }}
+    <span class="hide-mobile">
+      ACTIVAR {{ data.text }}
+    </span>
   </el-button>
 </template>
 

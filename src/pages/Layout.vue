@@ -11,6 +11,7 @@
         <el-main>
           <Body />
           <UploadDialog/>
+          <div id="dialogs"></div>
         </el-main>
       </el-container>
     </el-container>

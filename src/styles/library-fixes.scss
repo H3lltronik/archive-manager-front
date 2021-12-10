@@ -17,7 +17,7 @@
     width: 350px !important;
 }
 
-@media (max-width: $breakpoint-mobile) {
+@media (max-width: $breakpoint-tablet) {
     .el-aside {
         z-index: 10;
         left: 0 !important;

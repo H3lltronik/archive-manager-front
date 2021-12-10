@@ -2,7 +2,7 @@
   <div class="body_footer">
     <strong class=""> {{ totalFiles }} ARCHIVOS </strong>
 
-    <div class="">
+    <div class="body_footer_actions">
       <el-button
         style="margin-right: 10px"
         type="default"
@@ -10,7 +10,7 @@
         @click="deleteArchive"
         :icon="Delete"
       >
-        <span>BORRAR</span>
+        <span class="hide-mobile">BORRAR</span>
       </el-button>
       <router-link :to="ROUTES.ANALISIS.route">
         <el-button
@@ -19,7 +19,7 @@
           v-if="searchMode"
           :icon="FullScreen"
         >
-          <span>ANALIZAR</span>
+          <span class="hide-mobile">ANALIZAR</span>
         </el-button>
       </router-link>
       <strong class="">
