@@ -64,8 +64,10 @@ export default {
     });
 
     const logout = async () => {
+      store.commit("loading", true);
       const result = await doLogout();
       store.commit("resetStore");
+      store.commit("loading", false);
       switchTheme(LIGHT_THEME);
       if (!result.error) {
         router.push(ROUTES.LOGIN.route);
