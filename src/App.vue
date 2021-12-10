@@ -1,5 +1,6 @@
 <template>
   <router-view />
+  <div id="dialogs"></div>
 </template>
 
 <script setup lang="ts">

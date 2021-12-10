@@ -8,9 +8,9 @@
     </el-button>
 
     <el-checkbox-group class="aside_filters" v-model="filters" fill="#ff00FF">
-      <el-checkbox :label="1" v-if="user.level >= 1" >Archivos Nivel 1</el-checkbox>
-      <el-checkbox :label="2" v-if="user.level >= 2" >Archivos Nivel 2</el-checkbox>
-      <el-checkbox :label="3" v-if="user.level >= 3" >Archivos Nivel 3</el-checkbox>
+      <el-checkbox :label="1" v-if="user?.level >= 1" >Archivos Nivel 1</el-checkbox>
+      <el-checkbox :label="2" v-if="user?.level >= 2" >Archivos Nivel 2</el-checkbox>
+      <el-checkbox :label="3" v-if="user?.level >= 3" >Archivos Nivel 3</el-checkbox>
     </el-checkbox-group>
   </div>
 </template>

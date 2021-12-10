@@ -20,24 +20,29 @@ export type State = {
   filters: number[];
 };
 
+const initialState: State = {
+  order: "grid",
+  theme: "theme-dark",
+  uploadModalOpened: false,
+  loading: true,
+  searchMode: false,
+  search: "",
+  user: null,
+  filters: [],
+  allFiles: [],
+  selectedFiles: [],
+  filesByName: [],
+  filesByContent: [],
+};
+
 export const key: InjectionKey<Store<State>> = Symbol();
 
 export const store = createStore<State>({
-  state: {
-    order: "grid",
-    theme: "theme-dark",
-    uploadModalOpened: false,
-    loading: true,
-    searchMode: false,
-    search: "",
-    user: null,
-    filters: [],
-    allFiles: [],
-    selectedFiles: [],
-    filesByName: [],
-    filesByContent: [],
-  },
+  state: { ...initialState },
   mutations: {
+    resetStore(state) {
+      state = initialState;
+    },
     changeOrderType(state, orderType: orderType) {
       state.order = orderType;
     },
@@ -111,11 +116,11 @@ export const store = createStore<State>({
       for (const file of state.selectedFiles) {
         const delResult = await deleteFile(file.id);
       }
-      
-      dispatch('fetchAllFiles');
+
+      dispatch("fetchAllFiles");
       if (state.searchMode) {
-        dispatch('fetchFilesByContent', state.search);
-        dispatch('fetchFilesByName', state.search);
+        dispatch("fetchFilesByContent", state.search);
+        dispatch("fetchFilesByName", state.search);
       }
       commit("setLoading", false);
     },

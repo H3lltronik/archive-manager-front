@@ -1,8 +1,11 @@
 <template>
   <div class="">
     <div class="header">
-      <div class="header_logo">
-        <h1>Logo</h1>
+      <div class="header_logo" @click="restartReset" style="cursor: pointer;">
+        <div class="">
+          <img class="" src="/8-archive-manager.png" alt="">
+        </div>
+        <h1><i>Archive Manager</i></h1>
       </div>
 
       <div class="header_search">
@@ -40,10 +43,11 @@ import { Calendar, Search, Avatar, Close } from "@element-plus/icons";
 import { ref } from "@vue/reactivity";
 import { doLogout } from "../../api";
 import { useRouter } from "vue-router";
-import { ROUTES } from "../../constants";
+import { DARK_THEME, LIGHT_THEME, ROUTES } from "../../constants";
 import { useStore } from "vuex";
 import { computed, watchEffect } from "vue";
 import { key } from "../../store";
+import { switchTheme } from '../../utils';
 
 export default {
   setup() {
@@ -61,6 +65,8 @@ export default {
 
     const logout = async () => {
       const result = await doLogout();
+      store.commit("resetStore");
+      switchTheme(LIGHT_THEME);
       if (!result.error) {
         router.push(ROUTES.LOGIN.route);
       }
@@ -74,9 +80,14 @@ export default {
 
     const user = computed(() => store.state.user);
     const username = user.value ? user.value.name : "Account Name";
+    const restartReset = () => {
+      search.value = "";
+      handleEnter();
+    }
 
     return {
       search,
+      restartReset,
       logout,
       Close,
       username,

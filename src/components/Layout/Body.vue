@@ -5,7 +5,7 @@
       <div class="body_header_buttons">
         <ThemeSwitcher />
 
-        <div class="order" v-show="showFilters">
+        <div class="order order_list" v-show="showFilters">
           <el-button
             :class="{ 'order--active': getOrderType == 'list' }"
             type="text"

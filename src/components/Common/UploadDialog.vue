@@ -44,7 +44,7 @@ export default defineComponent({
     const customFilename = ref(null);
     const selectedFile = ref<Dropzone.DropzoneFile | null>(null);
     const dialogVisible = computed(() => store.state.uploadModalOpened);
-    const handleClose = (done: any) => {
+    const handleClose = () => {
       store.commit("setUploadModal", false);
     };
     const handleFileSelected = (file: Dropzone.DropzoneFile) => {

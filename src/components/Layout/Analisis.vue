@@ -1,18 +1,16 @@
 <template>
   <div class="analisis">
     <div class="analisis_header">
-      <router-link :to="ROUTES.HOME.route">
-        <el-button>
-          <span>Volver</span>
-        </el-button>
-      </router-link>
+      <el-button @click="goBack">
+        <span>Volver</span>
+      </el-button>
       <h1>Analisis de la busqueda {{ search }}</h1>
     </div>
     <el-row>
       <el-col :span="24">
         <h2>
-          Se ha encontrado la palabra `{{ search }}` en
-          {{ filesByName.length }} <i>archivos</i> distintos
+          Se ha encontrado la palabra `{{ search }}` en {{ titleTimes }}
+          <i>titulos de archivos</i> distintos
         </h2>
       </el-col>
       <el-col :span="24">
@@ -40,16 +38,20 @@ import { useStore } from "vuex";
 import { key } from "../../store";
 import { Chart, registerables } from "chart.js";
 import { ROUTES } from "../../constants";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
     const canvas = ref<HTMLCanvasElement>();
     const store = useStore(key);
+    const router = useRouter();
+    const titleTimes = ref(0);
     const search = computed(() => store.state.search);
     const filesByName = computed(() => store.getters.getFilteredFilesByName);
     const filesByContent = computed(
       () => store.getters.getFilteredFilesByContent
     );
+    let chart = null;
 
     onMounted(() => {
       Chart.register(...registerables);
@@ -58,7 +60,7 @@ export default {
         ?.getContext("2d");
 
       if (!ctx) return;
-      const chart = new Chart(ctx, {
+      chart = new Chart(ctx, {
         type: "bar",
         data: {
           labels: filesByContent.value.map((file: FileResult) => file.filename),
@@ -90,11 +92,22 @@ export default {
           (file: FileResult) => file.ocurrences
         );
         chart.update();
+
+        filesByName.value.forEach((file) => {
+          if (file.ocurrences) titleTimes.value += file.ocurrences;
+        });
       });
     });
 
+    const goBack = () => {
+      router.push(ROUTES.HOME.route);
+      if (chart) chart.destroy();
+    };
+
     return {
       search,
+      goBack,
+      titleTimes,
       filesByName,
       ROUTES,
       filesByContent,

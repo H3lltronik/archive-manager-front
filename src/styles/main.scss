@@ -8,8 +8,9 @@
     --gray-text: #4e4d4d;
     --gray-light: #eaeaea;
     --black-text: #101010;
+    --checkbox: #1a1a1a;
     --white: #fff;
-    --red: #bf334c;
+    --red: #1a1a1a;
     --background: #fff;
     --file-background: #fff;
     --button-text: #4a00b3;
@@ -19,13 +20,14 @@
 :root[data-theme="theme-dark"] {
     --purple-light: #6200ee;
     --purple-dark: #4a00b3;
-    --purple-text: #883ff1;
+    --purple-text: #fff;
     --blue-light: #4940f2;
     --gray-text: #fff;
     --gray-light: #eaeaea;
     --black-text: #fff;
-    --white: #fff;
-    --red: #bf334c;
+    --white: #1a1a1a;
+    --red: #fff;
+    --checkbox: #323233;
     --background: #1e1e1e;
     --file-background: #323233;
     --button-text: #fff;

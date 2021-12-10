@@ -1,7 +1,7 @@
 export const niceBytes = (x: number) => {
   const units = ["bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
   let l = 0,
-    n = parseInt(x, 10) || 0;
+    n = parseInt(x + '', 10) || 0;
   while (n >= 1024 && ++l) {
     n = n / 1024;
   }

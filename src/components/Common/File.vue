@@ -18,7 +18,7 @@
 
       <div class="file_image">
         <img
-          src="https://somoskudasai.com/wp-content/uploads/2021/01/portada_usada-pekora-6.jpg"
+          src="https://curate.nd.edu/assets/curate/default-1d435cdbfc607f1ce11e41ab0baa1704f437a7944c5a75a1d509edaf28b05902.png"
           alt=""
         />
       </div>
