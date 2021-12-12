@@ -47,6 +47,18 @@ type FileResult = {
   ocurrences: number;
 };
 
+type FileResultContents = {
+  id: number;
+  filename: string;
+  path: string;
+  level: number;
+  size: number;
+  mimetype: string;
+  ocurrences: number;
+  words: number;
+  characters: number;
+};
+
 type FileCreationRes = {
     filename: string;
     path: string;

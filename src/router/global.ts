@@ -6,6 +6,7 @@ import Login from "../pages/Login.vue";
 import Recover from "../pages/Recover.vue";
 import Register from "../pages/Register.vue";
 import AnalisisPage from "../pages/AnalisisPage.vue";
+import DoRecover from "../pages/DoRecover.vue";
 import { store } from "../store";
 
 const routes: RouteRecordRaw[] = [
@@ -20,6 +21,12 @@ const routes: RouteRecordRaw[] = [
     name: ROUTES.RECOVERY.name,
     component: Recover,
     meta: ROUTES.RECOVERY.meta,
+  },
+  {
+    path: ROUTES.DORECOVERY.route,
+    name: ROUTES.DORECOVERY.name,
+    component: DoRecover,
+    meta: ROUTES.DORECOVERY.meta,
   },
   {
     path: ROUTES.REGISTER.route,

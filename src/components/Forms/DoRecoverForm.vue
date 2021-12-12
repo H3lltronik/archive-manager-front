@@ -1,11 +1,11 @@
 <template>
     <el-form ref="ruleForm" :model="form" :rules="requestRecoverRules" class="login_form" label-position="top">
-        <el-form-item prop="email">
-            <el-input v-model="form.email" placeholder="example@domain.com"></el-input>
+        <el-form-item prop="password">
+            <el-input v-model="form.password" placeholder="Tu nueva contraseña" type="password"></el-input>
         </el-form-item>
 
         <div class="recover_footer">
-            <el-button type="primary" size="small" class="" @click="doRequestRecovery">ENVIAR CORREO</el-button>
+            <el-button type="primary" size="small" class="" @click="doRequestRecovery">RECUPERAR CONTRASEÑA</el-button>
         </div>
     </el-form>
 </template>
@@ -21,21 +21,15 @@ export default {
     setup(_, {emit}) {
         const ruleForm = ref();
         const form = ref({
-            email: null,
+            password: null,
         });
 
         const doRequestRecovery = () => {
             if (ruleForm.value)
                 ruleForm.value.validate((valid: boolean) => {
                     if (valid) {
-                        emit('submit', form.value.email);
-                        ElNotification({
-                            title: 'Solicitud enviada',
-                            message: "Si el correo existe, se enviaran las instrucciones para la recuperacion de su cuenta",
-                            type: "info",
-                        })
+                        emit('submit', form.value.password);
                     }
-                    
                 })
 
         }

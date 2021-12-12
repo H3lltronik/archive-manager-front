@@ -10,7 +10,7 @@
                 <p>Ingresa el correo electronico del usuario a recuperar</p>
             </div>
 
-            <RecoverForm class="form"/>
+            <RecoverForm @submit="doRequestReset" class="form"/>
             <router-link :to="ROUTES.LOGIN.route">
                 <el-button>Volver</el-button>
             </router-link>
@@ -19,17 +19,20 @@
 </template>
 
 <script lang="ts">
+import { requestReset } from "../api";
 import RecoverForm from "../components/Forms/RecoverForm.vue";
 import { ROUTES } from "../constants";
 
 export default {
     setup() {
-        const recoverPassword = () => {}
-        const doLogin = () => {}
+        const doRequestReset = async (username: string) => {
+            const result = await requestReset(username);
+
+            console.log("result", result);
+        }
 
         return {
-            recoverPassword,
-            doLogin,
+            doRequestReset,
             ROUTES,
         };
     },

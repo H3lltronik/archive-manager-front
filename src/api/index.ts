@@ -132,8 +132,30 @@ export async function getFile(id: string) {
 
 export async function deleteFile(id: number) {
   return await resolve<FileCreationRes>(async () =>
-    axios.delete(`${API_URL}/files/${id}`, {
-      withCredentials: true,
-    }).then((res) => res.data)
+    axios
+      .delete(`${API_URL}/files/${id}`, {
+        withCredentials: true,
+      })
+      .then((res) => res.data)
+  );
+}
+
+export async function requestReset(username: string) {
+  return await resolve<string>(async () =>
+    axios.post(`${API_URL}/recover`, { username }).then((res) => res.data)
+  );
+}
+
+export async function getResetRequest(token: string) {
+  return await resolve<string>(async () =>
+    axios.get(`${API_URL}/recover/${token}`).then((res) => res.data)
+  );
+}
+
+export async function doReset(token: string, password: string) {
+  return await resolve<string>(async () =>
+    axios
+      .post(`${API_URL}/recover/do-recover`, { token, password })
+      .then((res) => res.data)
   );
 }

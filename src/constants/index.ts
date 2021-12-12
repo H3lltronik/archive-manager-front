@@ -1,8 +1,8 @@
 export const DARK_THEME = "theme-dark";
 export const LIGHT_THEME = "theme-light";
 
-// export const API_URL = "http://localhost:4000";
-export const API_URL = process.env.API_URL || "http://18.116.238.128:4000";
+export const API_URL = "http://localhost:4000";
+// export const API_URL = process.env.API_URL || "http://18.116.238.128:4000";
 
 export const SUPPORTED_MIMETYPES = [
   "application/pdf",
@@ -21,6 +21,13 @@ export const ROUTES = {
   RECOVERY: {
     name: "Recover",
     route: "/recover",
+    meta: {
+      isProtected: false,
+    },
+  },
+  DORECOVERY: {
+    name: "DoRecover",
+    route: "/do-recover/:token",
     meta: {
       isProtected: false,
     },
